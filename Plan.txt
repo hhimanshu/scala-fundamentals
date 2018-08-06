@@ -1,0 +1,43 @@
+Entities
+
+Bank
+ - name
+ - streetAddress
+ - city
+ - country
+ - postalCode
+ - website
+ - contactEmail
+ - phoneNumbers
+
+Customer
+ - firstName
+ - lastName
+ - email
+ - phoneNumber
+ - dateOfBirth
+ - streetAddress
+ - city
+ - country
+ - postalCode
+
+Products
+- Deposits
+     - checkings (rateOfInterestEarnedPerYear, minimumBalancePerMonth)
+        - coreChecking (0.010, 1000)
+        - interestChecking (0.012, 3000)
+        - studentChecking (0.005, 0)
+        - businessChecking (0.020, 15000)
+     - savings (rateOfInterestEarnedPerYear, minimumBalancePerMonth, transactionsAllowedPerMonth)
+        - rewardsSavings (0.20, 2000, 2)
+        - childSavings (0.21, 5000, 5)
+        - fixedDeposits (0.30, 10000, 0)
+- Lending
+     - creditCards (annualFee, regularApr, rewardsPercent)
+        - cashRewards (0, 15.34, 0.75)
+        - travelRewards (91, 12.21, 1.2)
+        - pointRewards (77, 13.56, 1.0)
+     - mortgage
+        - homeLoans (interestRate, fees, loanTermInYears)
+            - fixed (4.35, 770, 30)
+            - 2-year fixed (4.22, 500, 2)
