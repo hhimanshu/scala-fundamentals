@@ -41,3 +41,9 @@ Products
         - homeLoans (interestRate, fees, loanTermInYears)
             - fixed (4.35, 770, 30)
             - 2-year fixed (4.22, 500, 2)
+
+-->
+1. What behaviours to keep in each class?
+2. How to database? We need to model them in classes.
+3. How to perform auditing?
+4. For implicits, introduce another bank in different country and do money transfer? (currency conversion implicit)
