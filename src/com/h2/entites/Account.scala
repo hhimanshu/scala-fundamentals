@@ -3,7 +3,7 @@ package com.h2.entites
 class Account(c: Customer, p: Product, b: Int) {
   val customer: Customer = c
   val product: Product = p
-  var balance: Int = b
+  private var balance: Int = b
 
   def deposit(amount: Int): Unit = {
     println(s"Depositing $amount to $customer account")
