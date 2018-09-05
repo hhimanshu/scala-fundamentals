@@ -1,13 +1,11 @@
 package com.h2.entites
 
-class Bank(n: String, c: String, co: String, e: String, ps: Set[Product],
-           cs: Set[Customer], as: Set[Account]) {
-  println(s"$n Established 2018.")
-  val name: String = n
-  val city: String = c
-  val country: String = co
-  val email: String = e
-  val products: Set[Product] = ps
-  val customers: Set[Customer] = cs
-  val accounts: Set[Account] = as
+class Bank(val name: String,
+           val city: String,
+           val country: String,
+           val email: String,
+           val products: Set[Product],
+           val customers: Set[Customer],
+           val accounts: Set[Account]) {
+  println(s"$name Established 2018.")
 }

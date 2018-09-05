@@ -13,9 +13,9 @@ object BankOfScala {
     val products = Set(coreChecking, studentCheckings, rewardsSavings, creditCard)
 
     val bobMartin = new Customer("Bob", "Martin", "bob@martin.com", LocalDate.of(1983, 8, 22))
-    val bobCheckingAccount = new Account(bobMartin, coreChecking, 1000)
-    val bobSavingsAccount = new Account(bobMartin, rewardsSavings, 20000)
-    val bobCreditAccount = new Account(bobMartin, creditCard, 4500)
+    val bobCheckingAccount = new DepositsAccount(bobMartin, coreChecking, 10000)
+    val bobSavingsAccount = new DepositsAccount(bobMartin, rewardsSavings, 20000)
+    val bobCreditAccount = new LendingAccount(bobMartin, creditCard, 4500)
     val accounts = Set(bobCheckingAccount, bobSavingsAccount, bobCreditAccount)
 
     val bank = new Bank("Bank Of Scala", "Auckland", "New Zealand",
