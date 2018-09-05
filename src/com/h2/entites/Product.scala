@@ -9,7 +9,7 @@ abstract class Product {
 /* --------------------- Deposits Products -------------------- */
 abstract class Deposits extends Product {
   val interestRatePerYear: Double
-  val minimumBalancePerMonth: Int
+  val minimumBalancePerMonth: Dollars
 }
 
 abstract class Checkings extends Deposits
@@ -19,20 +19,20 @@ abstract class Savings extends Deposits {
 }
 
 /* ------ Checkings Products ------ */
-class CoreChecking(val minimumBalancePerMonth: Int,
+class CoreChecking(val minimumBalancePerMonth: Dollars,
                    val interestRatePerYear: Double) extends Checkings {
   println("Created Core Checking Product")
   override val name: String = "Core Checking"
 }
 
-class StudentCheckings(val minimumBalancePerMonth: Int,
+class StudentCheckings(val minimumBalancePerMonth: Dollars,
                        val interestRatePerYear: Double) extends Checkings {
   println("Created Student Checking Product")
   override val name: String = "Student Checking"
 }
 
 /* ------ Savings Products ------ */
-class RewardsSavings(val minimumBalancePerMonth: Int,
+class RewardsSavings(val minimumBalancePerMonth: Dollars,
                      val interestRatePerYear: Double,
                      val transactionsAllowedPerMonth: Int) extends Savings {
   println("Created Rewards Savings Product")
