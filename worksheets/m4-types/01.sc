@@ -20,6 +20,7 @@ val anotherTenDotSomething = 10.23F
 /* Double Type */
 val tenDouble = 10.23
 val anotherTenDouble = 10.23D
+val anotherTenDoubleD = 10.23d
 val tenDoubleExponent = 1.023E1
 val anotherTenDoubleExponent = 0.1023e2
 
