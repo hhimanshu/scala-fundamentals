@@ -1,6 +1,9 @@
 package com.h2.entites
 
+import java.util.UUID
+
 abstract class Product {
+  val id: UUID = UUID.randomUUID()
   val name: String
 
   override def toString: String = "product=" + name

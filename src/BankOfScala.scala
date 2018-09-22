@@ -6,6 +6,7 @@ object BankOfScala {
   def main(args: Array[String]): Unit = {
     println("Instantiating Bank")
 
+/*
     val coreChecking = new CoreChecking(Dollars(1000), 0.025)
     val studentCheckings = new StudentCheckings(Dollars(0), 0.010)
     val rewardsSavings = new RewardsSavings(Dollars(10000), 0.10, 1)
@@ -33,5 +34,6 @@ object BankOfScala {
     bobCheckingAccount withdraw 200
 
     println(bobCheckingAccount)
+*/
   }
 }
