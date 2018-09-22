@@ -1,10 +1,13 @@
 package com.h2.entites
 
+import java.util.UUID
+
 abstract class Account {
+  val id: UUID = UUID.randomUUID()
   val customer: Customer
   val product: Product
-  def getBalance: Dollars
 
+  def getBalance: Dollars
 }
 
 class DepositsAccount(val customer: Customer,

@@ -6,19 +6,22 @@ import java.util.UUID
 class Bank(val name: String,
            val city: String,
            val country: String,
-           val email: Email,
-           private var products: Map[UUID, Product],
-           private var customers: Map[UUID, Customer],
-           private var accounts: Map[UUID, Account]) {
+           val email: Email) {
+  private var depositProducts: Map[UUID, Deposits] = Map.empty
+  private var depositAccounts: Map[UUID, DepositsAccount] = Map.empty
+  private var lendingProducts: Map[UUID, Lending] = Map.empty
+  private var lendingAccounts: Map[UUID, LendingAccount] = Map.empty
+  private var customers: Map[UUID, Customer] = Map.empty
 
   println(s"$name Established 2018.")
 
   /**
     * // todo: (challenge?) how to disallow customer with same details?
-    * @param first: first name for the customer
-    * @param last: last name for the customer
-    * @param email: email for the customer in 'value@domain' format
-    * @param dateOfBirth: : date of birth for the customer in 'yyyy/mm/dd' format
+    *
+    * @param first       : first name for the customer
+    * @param last        : last name for the customer
+    * @param email       : email for the customer in 'value@domain' format
+    * @param dateOfBirth : : date of birth for the customer in 'yyyy/mm/dd' format
     * @return the customer id for the new customer
     */
   def createNewCustomer(first: String, last: String,
@@ -35,42 +38,66 @@ class Bank(val name: String,
     }
 
     val customer = new Customer(first, last, getEmail, getDateOfBirth)
-    addCustomerToBank(customer)
+    customers += (customer.id -> customer)
     customer.id
-  }
-
-  private def addCustomerToBank(customer: Customer): Unit = {
-    customers + (customer.id -> customer)
   }
 
   /**
     * // todo: (challenge?) how to disallow products of same name?
-    * @param name: name of the product
-    * @param minBalance: the minimum balance required for the product
-    * @param ratePerYear: the rate of interest earned by the end of the year
-    * @param transactionsAllowedPerMonth: number of free transactions allowed for the product (optional)
+    *
+    * @param name                        : name of the product
+    * @param minBalance                  : the minimum balance required for the product
+    * @param ratePerYear                 : the rate of interest earned by the end of the year
+    * @param transactionsAllowedPerMonth : number of free transactions allowed for the product (optional)
     * @return the product id for the new product
     */
-  def addNewDepositProducts(name: String, minBalance: Int, ratePerYear: Double,
+  def addNewDepositProduct(name: String, minBalance: Int, ratePerYear: Double,
                             transactionsAllowedPerMonth: Option[Int]): UUID = {
     val product = name match {
       case "CoreChecking" => new CoreChecking(Dollars(minBalance), ratePerYear)
       case "StudentChecking" => new StudentCheckings(Dollars(minBalance), ratePerYear)
       case "RewardsSavings" => new RewardsSavings(Dollars(minBalance), ratePerYear, transactionsAllowedPerMonth.get)
     }
-    addProductToBank(product)
+
+    depositProducts += (product.id -> product)
     product.id
   }
 
-  private def addProductToBank(product: Product): Unit = {
-    products + (product.id -> product)
+  def addNewLendingProduct(annualFee: Double, apr: Double, rewardsPercent: Double): UUID = {
+    val product = new CreditCard(annualFee, apr, rewardsPercent)
+    lendingProducts += (product.id -> product)
+    product.id
   }
 
-//  def openCustomerAccount()
+  def openDepositAccount(customerId: UUID, productId: UUID, amount: Dollars): UUID = {
+    val maybeCustomer = customers.get(customerId)
+    val maybeProduct = depositProducts.get(productId)
+
+    if (maybeCustomer.isEmpty) throw new IllegalArgumentException(s"no customer found with id=$customerId")
+    if (maybeProduct.isEmpty) throw new IllegalArgumentException(s"no deposits product found with id=$productId")
+
+    val account = new DepositsAccount(maybeCustomer.get, maybeProduct.get, amount)
+    depositAccounts += (account.id -> account)
+    account.id
+  }
+
+  def openLendingAccount(customerId: UUID, productId: UUID, balance: Dollars = Dollars(0)): UUID = {
+    val maybeCustomer = customers.get(customerId)
+    val maybeProduct = lendingProducts.get(productId)
+
+    if (maybeCustomer.isEmpty) throw new IllegalArgumentException(s"no customer found with id=$customerId")
+    if (maybeProduct.isEmpty) throw new IllegalArgumentException(s"no lending product found with id=$productId")
+
+    val account = new LendingAccount(maybeCustomer.get, maybeProduct.get, balance)
+    lendingAccounts += (account.id -> account)
+    account.id
+  }
 
 
   override def toString: String = s"[$name]" +
-    s" - ${products.size} products" +
     s" - ${customers.size} customers" +
-    s" - ${accounts.size} accounts"
+    s" - ${depositProducts.size} deposits products" +
+    s" - ${depositAccounts.size} deposits accounts" +
+    s" - ${lendingProducts.size} lending products" +
+    s" - ${lendingAccounts.size} lending accounts"
 }
