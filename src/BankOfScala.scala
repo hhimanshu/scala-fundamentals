@@ -1,10 +1,19 @@
-import java.time.LocalDate
-
 import com.h2.entites._
 
 object BankOfScala {
   def main(args: Array[String]): Unit = {
+
     println("Instantiating Bank")
+
+    val bank = new Bank("Bank of Scala", "Auckland", "New Zealand", Email("bank", "scala.com"))
+    val customerIds = getCustomers map (c => bank.createNewCustomer(c._1, c._2, c._3, c._4))
+    val depositProductIds = getDepositProducts map (p => bank.addNewDepositProduct(p._1, p._2, p._3))
+    val lendingProductIds = getLendingProducts map (l => bank.addNewLendingProduct(l._2, l._3, l._4))
+
+    println(bank.toString)
+    println(customerIds.toString)
+    println(depositProductIds.toString)
+    println(lendingProductIds.toString)
 
 /*
     val coreChecking = new CoreChecking(Dollars(1000), 0.025)
@@ -18,6 +27,7 @@ object BankOfScala {
     val bobSavingsAccount = new DepositsAccount(bobMartin, rewardsSavings, Dollars(20000))
     val bobCreditAccount = new LendingAccount(bobMartin, creditCard, Dollars(4500))
     val accounts = Set(bobCheckingAccount, bobSavingsAccount, bobCreditAccount)
+
 
     val bank = new Bank("Bank Of Scala", "Auckland", "New Zealand",
       Email("bank", "scala.com"), products, Set(bobMartin), accounts)
@@ -34,6 +44,26 @@ object BankOfScala {
     bobCheckingAccount withdraw 200
 
     println(bobCheckingAccount)
-*/
+    */
+  }
+
+  def getCustomers: Seq[(String, String, String, String)] = {
+    Seq(
+      ("Bob", "Martin", "bob@martin.com", "1976/11/25"),
+      ("Amy", "Jones", "amy.jones@google.com", "1983/4/12"),
+      ("Taylor", "Jackson", "taylor33@jackson.com", "1985/4/5")
+    )
+  }
+
+  def getDepositProducts: Seq[(String, Int, Double)] = {
+    Seq(
+      ("CoreChecking", 1000, 0.025),
+      ("StudentCheckings", 0, 0.010),
+      ("RewardsSavings", 10000, 0.10),
+    )
+  }
+
+  def getLendingProducts: Seq[(String, Double, Double, Double)] = {
+    Seq(("CreditCard", 99.00, 14.23, 20.00))
   }
 }

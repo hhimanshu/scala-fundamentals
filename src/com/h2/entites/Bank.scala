@@ -52,11 +52,11 @@ class Bank(val name: String,
     * @return the product id for the new product
     */
   def addNewDepositProduct(name: String, minBalance: Int, ratePerYear: Double,
-                            transactionsAllowedPerMonth: Option[Int]): UUID = {
+                            transactionsAllowedPerMonth: Int = 2): UUID = {
     val product = name match {
       case "CoreChecking" => new CoreChecking(Dollars(minBalance), ratePerYear)
-      case "StudentChecking" => new StudentCheckings(Dollars(minBalance), ratePerYear)
-      case "RewardsSavings" => new RewardsSavings(Dollars(minBalance), ratePerYear, transactionsAllowedPerMonth.get)
+      case "StudentCheckings" => new StudentCheckings(Dollars(minBalance), ratePerYear)
+      case "RewardsSavings" => new RewardsSavings(Dollars(minBalance), ratePerYear, transactionsAllowedPerMonth)
     }
 
     depositProducts += (product.id -> product)
