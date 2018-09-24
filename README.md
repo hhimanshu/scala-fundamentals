@@ -9,3 +9,8 @@ https://www.jetbrains.com/idea/download
 ```bash
 git checkout -b m3-object-oriented-scala origin/m3-object-oriented-scala
 ```
+
+##### Module 04: Working with Basic Types
+```bash
+git checkout -b m4-types origin/m4-types
+```
