@@ -5,11 +5,11 @@ object Dollars {
 }
 
 class Dollars(val amount: Int) extends AnyVal {
-  def +(value: Int): Dollars = new Dollars(amount + value)
+  def +(dollars: Dollars): Dollars = new Dollars(amount + dollars.amount)
 
-  def -(value: Int): Dollars = new Dollars(amount - value)
+  def -(dollars: Dollars): Dollars = new Dollars(amount - dollars.amount)
 
-  def >(value: Int): Boolean = amount > value
+  def >(dollars: Dollars): Boolean = amount > dollars.amount
 
   override def toString: String = "$" + amount
 }

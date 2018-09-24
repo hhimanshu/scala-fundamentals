@@ -11,10 +11,10 @@ object BankOfScala {
     val lendingProductIds = getLendingProducts map (l => bank.addNewLendingProduct(l._2, l._3, l._4))
 
     /* logging */
-    println(bank)
-    println(customerIds)
-    println(depositProductIds)
-    println(lendingProductIds)
+    println(s"Bank: $bank")
+    println(s"CustomerIds: $customerIds")
+    println(s"Deposits Products Ids: $depositProductIds")
+    println(s"LendingProductIds: $lendingProductIds")
 
 
     /*
@@ -27,13 +27,13 @@ object BankOfScala {
     } yield bank.openDepositAccount(c, p, _: Dollars)
 
     /* Depositing money into the accounts */
-    val random = new scala.util.Random(10000)
-    val depositAccountIds = depositAccounts.map(account => account(Dollars(10000 + random.nextInt())))
+    val random = new scala.util.Random()
+    val depositAccountIds = depositAccounts.map(account => account(Dollars(10000 + random.nextInt(10000))))
 
 
     /* logging */
-    println(depositAccounts)
-    println(depositAccountIds)
+    println(s"Deposits Accounts: $depositAccounts")
+    println(s"Deposits Account Ids: $depositAccountIds")
 
     /*
      Open credit card accounts.
@@ -43,43 +43,25 @@ object BankOfScala {
       c <- customerIds
       p <- lendingProductIds
     } yield bank.openLendingAccount(c, p, _: Dollars)
-    val lendingAccountIds = lendingAccounts.map(account => account(Dollars(random.nextInt())))
+    val lendingAccountIds = lendingAccounts.map(account => account(Dollars(random.nextInt(500))))
 
     /* logging */
-    println(lendingAccounts)
-    println(lendingAccountIds)
-
+    println(s"Lending Accounts: $lendingAccounts")
+    println(s"Lending Account Ids: $lendingAccountIds")
+    println(s"Bank: $bank")
 
     /*
-        val coreChecking = new CoreChecking(Dollars(1000), 0.025)
-        val studentCheckings = new StudentCheckings(Dollars(0), 0.010)
-        val rewardsSavings = new RewardsSavings(Dollars(10000), 0.10, 1)
-        val creditCard = new CreditCard(99.00, 14.23, 20.00)
-        val products = Set(coreChecking, studentCheckings, rewardsSavings, creditCard)
+      Performing Deposit Accounts transactions
+     */
+    val randomAmount = new scala.util.Random(100)
+    depositAccountIds.foreach(bank deposit(_, Dollars(1 + randomAmount.nextInt(100))))
+    depositAccountIds.foreach(bank withdraw(_, Dollars(1 + randomAmount.nextInt(50))))
 
-        val bobMartin = new Customer("Bob", "Martin", Email("bob", "martin.com"), LocalDate.of(1983, 8, 22))
-        val bobCheckingAccount = new DepositsAccount(bobMartin, coreChecking, Dollars(10000))
-        val bobSavingsAccount = new DepositsAccount(bobMartin, rewardsSavings, Dollars(20000))
-        val bobCreditAccount = new LendingAccount(bobMartin, creditCard, Dollars(4500))
-        val accounts = Set(bobCheckingAccount, bobSavingsAccount, bobCreditAccount)
-
-
-        val bank = new Bank("Bank Of Scala", "Auckland", "New Zealand",
-          Email("bank", "scala.com"), products, Set(bobMartin), accounts)
-
-
-        println(bobCheckingAccount)
-
-        //bobCheckingAccount.deposit(100)
-        bobCheckingAccount deposit 100
-
-        println(bobCheckingAccount)
-
-        //bobCheckingAccount.withdraw(200)
-        bobCheckingAccount withdraw 200
-
-        println(bobCheckingAccount)
-        */
+    /*
+      Performing Deposit Accounts transactions
+    */
+    lendingAccountIds.foreach(bank useCreditCard (_, Dollars(1 + randomAmount.nextInt(200))))
+    lendingAccountIds.foreach(bank payCreditCardBill (_, Dollars(1 + randomAmount.nextInt(200))))
   }
 
   /* ------------------- Data ------------------- */

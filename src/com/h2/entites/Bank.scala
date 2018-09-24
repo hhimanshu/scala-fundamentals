@@ -93,6 +93,25 @@ class Bank(val name: String,
     account.id
   }
 
+  def deposit(accountId: UUID, dollars: Dollars): Unit = {
+    require(depositAccounts.get(accountId).nonEmpty, "A valid deposits account Id must be provided")
+    depositAccounts(accountId) deposit dollars
+  }
+
+  def withdraw(accountId: UUID, dollars: Dollars): Unit = {
+    require(depositAccounts.get(accountId).nonEmpty, "A valid deposits account Id must be provided")
+    depositAccounts(accountId) withdraw dollars
+  }
+
+  def useCreditCard(accountId: UUID, dollars: Dollars): Unit = {
+    require(lendingAccounts.get(accountId).nonEmpty, "A valid lending account Id must be provided")
+    lendingAccounts(accountId) withdraw dollars
+  }
+
+  def payCreditCardBill(accountId: UUID, dollars: Dollars): Unit = {
+    require(lendingAccounts.get(accountId).nonEmpty, "A valid lending account Id must be provided")
+    lendingAccounts(accountId) payBill dollars
+  }
 
   override def toString: String = s"[$name]" +
     s" - ${customers.size} customers" +
