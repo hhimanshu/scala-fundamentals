@@ -3,7 +3,7 @@ import com.h2.entites._
 object BankOfScala {
   def main(args: Array[String]): Unit = {
 
-    println("Instantiating Bank")
+    println("Opening Bank")
 
     val bank = new Bank(name = "Bank of Scala", country = "New Zealand", city = "Auckland", email = Email("bank", "scala.com"))
     val customerIds = getCustomers map (c => bank.createNewCustomer(c._1, c._2, c._3, c._4))
@@ -28,12 +28,27 @@ object BankOfScala {
 
     /* Depositing money into the accounts */
     val random = new scala.util.Random(10000)
-    val depositAccountIds = depositAccounts.map(accounts => accounts(Dollars(10000 + random.nextInt())))
+    val depositAccountIds = depositAccounts.map(account => account(Dollars(10000 + random.nextInt())))
 
 
     /* logging */
     println(depositAccounts)
     println(depositAccountIds)
+
+    /*
+     Open credit card accounts.
+     The bank process has not finished the credit check, so, balance will be known later
+    */
+    val lendingAccounts = for {
+      c <- customerIds
+      p <- lendingProductIds
+    } yield bank.openLendingAccount(c, p, _: Dollars)
+    val lendingAccountIds = lendingAccounts.map(account => account(Dollars(random.nextInt())))
+
+    /* logging */
+    println(lendingAccounts)
+    println(lendingAccountIds)
+
 
     /*
         val coreChecking = new CoreChecking(Dollars(1000), 0.025)
@@ -67,6 +82,7 @@ object BankOfScala {
         */
   }
 
+  /* ------------------- Data ------------------- */
   def getCustomers: Seq[(String, String, String, String)] = {
     Seq(
       ("Bob", "Martin", "bob@martin.com", "1976/11/25"),
