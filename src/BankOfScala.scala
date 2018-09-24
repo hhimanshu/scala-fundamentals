@@ -60,8 +60,8 @@ object BankOfScala {
     /*
       Performing Deposit Accounts transactions
     */
-    lendingAccountIds.foreach(bank useCreditCard (_, Dollars(1 + randomAmount.nextInt(200))))
-    lendingAccountIds.foreach(bank payCreditCardBill (_, Dollars(1 + randomAmount.nextInt(200))))
+    lendingAccountIds.foreach(bank useCreditCard (_, Dollars(1 + randomAmount.nextInt(500))))
+    lendingAccountIds.foreach(bank payCreditCardBill (_, Dollars(1 + randomAmount.nextInt(100))))
   }
 
   /* ------------------- Data ------------------- */
