@@ -70,25 +70,19 @@ class Bank(val name: String,
   }
 
   def openDepositAccount(customerId: UUID, productId: UUID, amount: Dollars): UUID = {
-    val maybeCustomer = customers.get(customerId)
-    val maybeProduct = depositProducts.get(productId)
+    require(customers.get(customerId).nonEmpty, s"no customer found with id=$customerId")
+    require(depositProducts.get(productId).nonEmpty, s"no deposits product found with id=$productId")
 
-    if (maybeCustomer.isEmpty) throw new IllegalArgumentException(s"no customer found with id=$customerId")
-    if (maybeProduct.isEmpty) throw new IllegalArgumentException(s"no deposits product found with id=$productId")
-
-    val account = new DepositsAccount(maybeCustomer.get, maybeProduct.get, amount)
+    val account = new DepositsAccount(customers(customerId), depositProducts(productId), amount)
     depositAccounts += (account.id -> account)
     account.id
   }
 
   def openLendingAccount(customerId: UUID, productId: UUID, balance: Dollars = Dollars(0)): UUID = {
-    val maybeCustomer = customers.get(customerId)
-    val maybeProduct = lendingProducts.get(productId)
+    require(customers.get(customerId).nonEmpty, s"no customer found with id=$customerId")
+    require(lendingProducts.get(productId).nonEmpty, s"no lending product found with id=$productId")
 
-    if (maybeCustomer.isEmpty) throw new IllegalArgumentException(s"no customer found with id=$customerId")
-    if (maybeProduct.isEmpty) throw new IllegalArgumentException(s"no lending product found with id=$productId")
-
-    val account = new LendingAccount(maybeCustomer.get, maybeProduct.get, balance)
+    val account = new LendingAccount(customers(customerId), lendingProducts(productId), balance)
     lendingAccounts += (account.id -> account)
     account.id
   }
