@@ -58,7 +58,7 @@ object BankOfScala {
     depositAccountIds.foreach(bank withdraw(_, Dollars(1 + randomAmount.nextInt(50))))
 
     /*
-      Performing Deposit Accounts transactions
+      Performing Lending Accounts transactions
     */
     lendingAccountIds.foreach(bank useCreditCard (_, Dollars(1 + randomAmount.nextInt(500))))
     lendingAccountIds.foreach(bank payCreditCardBill (_, Dollars(1 + randomAmount.nextInt(100))))
