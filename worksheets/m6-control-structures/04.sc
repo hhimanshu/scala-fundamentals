@@ -1,14 +1,14 @@
-def time(operationName: String, operation: () => Unit): Unit = {
+def time(n: Int, operation: Int => Unit): Unit = {
   val startTime = System.currentTimeMillis()
-  operation()
+  operation(n)
   val elapsedTime = System.currentTimeMillis() - startTime
-  println(s"======= $operationName took $elapsedTime milliseconds=======")
+  println(s"======= operation took $elapsedTime milliseconds=======")
 }
 
-val operation = () => {
+val operation = (n: Int) => {
   Thread.sleep(1000) // introduced latency
-  val numbers = (1 to 100).toList
-  println(s"Sum of first hundred numbers is ${numbers.sum}")
+  val numbers = (1 to n).toList
+  println(s"Sum of first $n numbers is ${numbers.sum}")
 }
 
-time("op1", operation)
+time(100, operation)
