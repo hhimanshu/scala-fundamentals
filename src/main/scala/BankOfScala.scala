@@ -1,5 +1,4 @@
 import java.time.LocalDate
-
 import com.h2.entites._
 
 object BankOfScala {
