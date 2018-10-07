@@ -24,14 +24,10 @@ object BankOfScala {
 
     println(bobCheckingAccount)
 
-    //bobCheckingAccount.deposit(100)
-    bobCheckingAccount deposit 100
-
+    bobCheckingAccount.deposit(100)
     println(bobCheckingAccount)
 
-    //bobCheckingAccount.withdraw(200)
-    bobCheckingAccount withdraw 200
-
+    bobCheckingAccount.withdraw(200)
     println(bobCheckingAccount)
   }
 }
