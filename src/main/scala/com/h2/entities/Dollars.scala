@@ -1,4 +1,4 @@
-package com.h2.entites
+package main.scala.com.h2.entities
 
 object Dollars {
   def apply(a: Int): Dollars = new Dollars(a)
