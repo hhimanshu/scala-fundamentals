@@ -1,4 +1,4 @@
-package com.h2.entites
+package main.scala.com.h2.entities
 
 import java.time.LocalDate
 import java.util.UUID
