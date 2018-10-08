@@ -1,4 +1,4 @@
-package com.h2.entites
+package main.scala.com.h2.entities
 
 class Bank(n: String, c: String, co: String, e: String, ps: Set[Product],
            cs: Set[Customer], as: Set[Account]) {

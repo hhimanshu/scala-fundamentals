@@ -1,4 +1,4 @@
-package com.h2.entites
+package main.scala.com.h2.entities
 
 class Account(c: Customer, p: Product, b: Int) {
   val customer: Customer = c
