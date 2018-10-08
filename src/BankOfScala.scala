@@ -1,3 +1,5 @@
+import java.util.UUID
+
 import com.h2.entites._
 
 object BankOfScala {
@@ -17,15 +19,16 @@ object BankOfScala {
     println(s"LendingProductIds: $lendingProductIds")
 
 
+    def openAccounts(customerId: UUID, productId: UUID, productType: String) = productType match {
+      case "Deposits" => bank.openDepositAccount(customerId, productId, _: Dollars)
+      case "Lending" => bank.openLendingAccount(customerId, productId, _: Dollars)
+    }
+
     /*
     Bank clerk opening the account.
     There is no money deposited in the account yet, so the accounts are not active
     */
-    val depositAccounts = for {
-      c <- customerIds
-      p <- depositProductIds
-    } yield bank.openDepositAccount(c, p, _: Dollars)
-
+    val depositAccounts = for (c <- customerIds; p <- depositProductIds) yield openAccounts(c, p, "Deposits")
     /* Depositing money into the accounts */
     val random = new scala.util.Random()
     val depositAccountIds = depositAccounts map { account => account(Dollars(10000 + random.nextInt(10000))) }
@@ -39,10 +42,7 @@ object BankOfScala {
      Open credit card accounts.
      The bank process has not finished the credit check, so, balance will be known later
     */
-    val lendingAccounts = for {
-      c <- customerIds
-      p <- lendingProductIds
-    } yield bank.openLendingAccount(c, p, _: Dollars)
+    val lendingAccounts = for (c <- customerIds; p <- lendingProductIds) yield openAccounts(c, p, "Lending")
     val lendingAccountIds = lendingAccounts map { account => account(Dollars(random.nextInt(500))) }
 
     /* logging */
