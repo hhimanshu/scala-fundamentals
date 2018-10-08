@@ -1,4 +1,4 @@
-package com.h2.entites
+package main.scala.com.h2.entities
 
 class Bank(val name: String,
            val city: String,

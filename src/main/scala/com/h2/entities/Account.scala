@@ -1,4 +1,4 @@
-package com.h2.entites
+package main.scala.com.h2.entities
 
 abstract class Account {
   val customer: Customer
