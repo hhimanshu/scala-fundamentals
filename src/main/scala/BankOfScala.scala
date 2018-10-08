@@ -1,6 +1,6 @@
+import main.scala.com.h2.entities._
 import java.util.UUID
 
-import com.h2.entites._
 
 object BankOfScala {
   def main(args: Array[String]): Unit = {
