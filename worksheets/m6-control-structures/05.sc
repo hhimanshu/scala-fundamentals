@@ -12,6 +12,9 @@ val operation = (n: Int) => {
   println(s"Sum of first $n numbers is ${numbers.sum}")
 }
 
+// call the curried function
+time (100)(operation)
+
 /* Replace the parenthesis with curly braces */
 time(100) {operation}
 
