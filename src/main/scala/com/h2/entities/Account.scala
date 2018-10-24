@@ -52,5 +52,5 @@ class LendingAccount(val customer: Customer,
 
   override def getBalance: Dollars = balance
 
-  override def toString = s"$customer with $product owes balance of $balance"
+  override def toString = s"$customer with $product has balance of $balance"
 }
