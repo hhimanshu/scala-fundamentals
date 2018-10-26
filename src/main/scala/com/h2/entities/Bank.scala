@@ -1,6 +1,6 @@
 package main.scala.com.h2.entities
 
-import main.scala.com.h2.service.{AccountService, CustomerService, ProductService}
+import main.scala.com.h2.services.{AccountService, CustomerService, ProductService}
 
 class Bank(val name: String, val city: String, val country: String, val email: Email)
   extends CustomerService

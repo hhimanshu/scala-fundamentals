@@ -1,4 +1,4 @@
-package main.scala.com.h2.service
+package main.scala.com.h2.services
 
 import java.time.LocalDate
 import java.util.UUID
