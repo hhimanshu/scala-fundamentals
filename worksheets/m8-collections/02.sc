@@ -19,7 +19,6 @@ val minimumL: Double = numbers.foldLeft(numbers.head)((b, a) => b min a)
 val maximumL: Double = numbers.foldLeft(numbers.head)((b, a) => b max a)
 val productL: Double = numbers.foldLeft(1.0)((b, a) => b * a)
 
-(0.0 /: numbers) (_ + _) // foldLeft
 
 /* foldRight examples */
 val sumR: Double = numbers.foldRight(0.0)((b, a) => b + a)
@@ -27,7 +26,6 @@ val minimumR: Double = numbers.foldRight(numbers.head)((b, a) => b min a)
 val maximumR: Double = numbers.foldRight(numbers.head)((b, a) => b max a)
 val productR: Double = numbers.foldRight(1.0)((b, a) => b * a)
 
-(numbers :\ 0.0) (_ + _) // foldRight
 
 /* fold examples */
 val sum: Double = numbers.fold(0.0)((b, a) => b + a)
