@@ -4,18 +4,6 @@ abstract class NumberQ {
   def put(i: Int): Unit
 }
 
-trait Add1 extends NumberQ {
-  abstract override def put(i: Int): Unit = super.put(i + 1)
-}
-
-trait Multiply2 extends NumberQ {
-  abstract override def put(i: Int): Unit = super.put(2 * i)
-}
-
-trait Power2 extends NumberQ {
-  abstract override def put(i: Int): Unit = super.put(math.pow(i, 2).toInt)
-}
-
 class Q extends NumberQ {
   private var numbers: List[Int] = List.empty
 
@@ -30,6 +18,17 @@ class Q extends NumberQ {
   }
 }
 
+trait Add1 extends NumberQ {
+  abstract override def put(i: Int): Unit = super.put(i + 1)
+}
+
+trait Multiply2 extends NumberQ {
+  abstract override def put(i: Int): Unit = super.put(2 * i)
+}
+
+trait Power2 extends NumberQ {
+  abstract override def put(i: Int): Unit = super.put(math.pow(i, 2).toInt)
+}
 
 class Add1Q extends Q with Add1
 
