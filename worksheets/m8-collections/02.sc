@@ -1,17 +1,3 @@
-val priceCoffeeByDay: Map[String, Double] = Map(
-  "Sunday" -> 2.45,
-  "Monday" -> 3.54,
-  "Tuesday" -> 4.50,
-  "Wednesday" -> 3.21,
-  "Thursday" -> 5.11,
-  "Friday" -> 2.39,
-  "Saturday" -> 5.87
-)
-
-val totalSpent = priceCoffeeByDay.values.sum
-// show how sum is implemented.
-
-
 val numbers = List(2.39, 3.54, 4.50, 3.21)
 /* foldLeft examples */
 val sumL: Double = numbers.foldLeft(0.0)((b, a) => b + a)
