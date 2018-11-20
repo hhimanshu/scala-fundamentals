@@ -1,7 +1,3 @@
-/* Implicits Conversion - Motivation */
-
-
-
 /* Implicits Parameter example - Motivation */
 abstract class Product {
   val price: Double
