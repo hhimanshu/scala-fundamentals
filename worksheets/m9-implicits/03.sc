@@ -8,6 +8,5 @@ object Conversions {
 
 withTax(Dollars(200), 0.10)
 
-// show that it does not find an implicit as Conversions.double to Dollars
 import Conversions._
 withTax(200.0, 0.30) // won't compile, needs Dollars
