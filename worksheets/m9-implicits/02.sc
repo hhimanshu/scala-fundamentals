@@ -1,6 +1,6 @@
 case class Dollars(amount: Double)
 
-def withTax(implicit dollars: Dollars, taxRate: Double) = Dollars(dollars.amount * (1 + taxRate))
+def withTax(dollars: Dollars, taxRate: Double) = Dollars(dollars.amount * (1 + taxRate))
 
 implicit def doubleToDollars(d: Double) = Dollars(d)
 
