@@ -1,8 +1,10 @@
 /* Converting the receiver */
-case class Dollars(amount: Double) {
+case class Dollars(amount: Int) {
   def prettify: String = "$" + amount
 }
 
-implicit def doubleToDollars(d: Double): Dollars = Dollars(d)
+implicit def doubleToDollars(d: Int): Dollars = Dollars(d)
 
-10.23 prettify
+val customerBalance: Int = 10000
+
+customerBalance prettify
