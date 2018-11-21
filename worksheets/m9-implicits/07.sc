@@ -5,9 +5,10 @@ abstract class Product {
 
 case class PackagedItem(price: Double) extends Product
 case class FreshProduce(price: Double) extends Product
-
 case class Tax(rate: Double)
+
 implicit val salesTax: Tax = Tax(0.10)
+val freshProduceSalesTax: Tax = Tax(0.0)
 
 def totalPrice(product: Product)(implicit tax: Tax): Double = product.price * (1 + tax.rate)
 
@@ -17,4 +18,4 @@ val avocado = FreshProduce(1.99)
 
 totalPrice(coffeeBag)
 totalPrice(bread)
-totalPrice(avocado)(salesTax)
+totalPrice(avocado)(freshProduceSalesTax)

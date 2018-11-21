@@ -17,4 +17,3 @@ val avocado = FreshProduce(1.99)
 
 totalPrice(coffeeBag, salesTax)
 totalPrice(bread, salesTax)
-totalPrice(avocado, salesTax)
