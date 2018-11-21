@@ -13,6 +13,10 @@ object Currency {
     "NZD" -> 1.0,
   )
 
+  /**
+    * @param money: example? "100 USD", "20 EUR"
+    * @return
+    */
   implicit def stringToCurrency(money: String): Currency = {
     val Array(value: String, code: String) = money.split("\\s")
     val requestedAmount: Double = value.toDouble
